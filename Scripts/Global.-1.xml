@@ -1,1 +1,41 @@
-<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->
+<Panel id="SetupPanel"
+  color="#8F8478"
+  outline="#000000"
+  outlineSize="2 -2"
+width="500"
+height="730"
+active="false"
+rectAlignment="Middle"
+showAnimation="Grow"
+hideAnimation="Shrink"
+returnToOriginalPositionWhenReleased="false"
+allowDragging="true">
+<VerticalLayout>
+  <Text>Official Ancient Ones</Text>
+<GridLayout>
+<Button>Nyarlathotep</Button>
+<Button>Antediluvium</Button>
+<Button>Shudde Mell</Button>
+<Button>Hypnos</Button>
+<Button>Atlach-Nacha</Button>
+<Button>Hastur</Button>
+<Button>Yog-Sothoth</Button>
+<Button>Azathoth</Button>
+<Button>Syzygy</Button>
+<Button>Ithaqua</Button>
+<Button>Shub-Niggurath</Button>
+<Button>Yig</Button>
+<Button><Image image="https://drive.google.com/uc?export=download&id=0BzeCHt4DkKC0UnZOa0w1aTY0R1k"/></Button>
+<Button>Nephren-Ka</Button>
+<Button>Cthulhu</Button>
+<Button>Elder Things</Button>
+</GridLayout>
+<Text>Fan Made Ancient Ones</Text>
+<GridLayout>
+<Button>Ghatanothoa</Button>
+<Button>Y-Golonac</Button>
+<Button>The King in Yellow</Button>
+<Button>The Mi-go</Button>
+</GridLayout>
+</VerticalLayout>
+</Panel>

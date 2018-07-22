@@ -56,7 +56,7 @@ function setupCharacter(a,b)
   end
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -76,7 +76,7 @@ function setupCharacterF(a,b)
   getObjectFromGUID(focus_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -95,7 +95,7 @@ function setupCharacterW(a,b)
   getObjectFromGUID(will_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -115,7 +115,7 @@ function setupCharacterTC(a,b)
   getObjectFromGUID(clue_bag).takeObject({position={a.getPosition().x,a.getPosition().y+3,a.getPosition().z}})
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -135,7 +135,7 @@ function setupCharacterRC(a,b)
   getObjectFromGUID(clue_bag).takeObject({position={a.getPosition().x,a.getPosition().y+3,a.getPosition().z}})
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -154,7 +154,7 @@ function setupCharacterC(a,b)
   getObjectFromGUID(clue_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -173,7 +173,7 @@ function setupCharacterT(a,b)
   getObjectFromGUID(ticket_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
   local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
   local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
-  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})
   hp.Counter.setValue(a.getVar('hp'))
   san.Counter.setValue(a.getVar('san'))
   token.setColorTint(stringColorToRGB(b))
@@ -187,7 +187,7 @@ function createButtons()
                           font_size = 400,
                           position = {0,0.30,0},
                           width = 1000,
-                          height = 550})  
+                          height = 550})
   assetButtons()
 end
 
@@ -240,13 +240,18 @@ function assets4()
 end
 
 function startGame(a, b)
+  UI.show("SetupPanel")
+  UI.setAttribute("SetupPanel", "active", "true")
+  UI.hide(reimu_card)
+end
+  --[[
   options = getOptions()
   if tonumber(options.prelude) == 1 then
     getPrelude()
   end
   randomAncient()
   gameStarted = true
-end
+end]]--
 
 function randomAncient()
   local allAncients = split(options.ancient_ones,',')
@@ -303,7 +308,7 @@ end
 function DreamSide()
   local pos = getObjectFromGUID(game_board).getPosition()
   local bag = getObjectFromGUID(dream_bag)
-  bag.takeObject({position={pos.x,1.01,pos.z-30.9},rotation={0,270,0},callback='callbackLock',callback_owner=Global}).interactable = true  
+  bag.takeObject({position={pos.x,1.01,pos.z-30.9},rotation={0,270,0},callback='callbackLock',callback_owner=Global}).interactable = true
   local tokens = searchForIn('Tokens',bag,{position={50,1,0}})
   searchForIn('Dream Quest',bag,{position={pos.x+10.6,1,pos.z-21},rotation={180,0,0}})
   searchForIn('Dreamlands',bag,{position={pos.x+10.6,1,pos.z-26.5},rotation={180,0,0}})
@@ -327,7 +332,7 @@ end
 function DreamSide2()
   local pos = getObjectFromGUID(game_board).getPosition()
   local bag = getObjectFromGUID(dream_bag)
-  bag.takeObject({position={pos.x,1.01,pos.z-30.9},rotation={0,270,0},callback='callbackLock',callback_owner=Global}).interactable = true  
+  bag.takeObject({position={pos.x,1.01,pos.z-30.9},rotation={0,270,0},callback='callbackLock',callback_owner=Global}).interactable = true
   local tokens = searchForIn('Tokens',bag,{position={50,1,0}})
   searchForIn('Dream Quest',bag,{position={pos.x+10.6,1,pos.z-21},rotation={180,0,0}})
   searchForIn('Dreamlands',bag,{position={pos.x+10.6,1,pos.z-26.5},rotation={180,0,0}})
