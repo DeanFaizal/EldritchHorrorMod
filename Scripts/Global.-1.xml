@@ -25,7 +25,7 @@ allowDragging="true">
        preserveAspect="true" rotation="0 0 90"
        padding="0"/>
     <Text>Abhoth</Text>
-    <Button id="AbhothSetupButton" opacity="0"/>
+    <Button id="AbhothSetupButton" opacity="0" onClick="setupAncient(Abhoth)"/>
   </Panel>
    <Panel>
       <Image image="AntediluviumMystery"
@@ -159,7 +159,7 @@ allowDragging="true">
          preserveAspect="true"
          padding="0"/>
       <Text>Random</Text>
-      <Button id="RandomOfficialAncientOneSetupButton" opacity="0" onClick=""/>
+      <Button id="RandomOfficialAncientOneSetupButton" opacity="0" onClick="randomAncient"/>
     </Panel>
 </GridLayout>
 

@@ -244,6 +244,12 @@ function startGame(a, b)
   UI.setAttribute("SetupPanel", "active", "true")
   UI.hide(reimu_card)
 end
+
+function hideSetupPanel(a, b)
+  UI.hide("SetupPanel")
+  UI.setAttribute("SetupPanel", "active", "false")
+end
+
   --[[
   options = getOptions()
   if tonumber(options.prelude) == 1 then
@@ -664,6 +670,7 @@ elseif name == 'Shudde Mell' then
   if not moreset then
     setAsideMonsters()
   end
+  hideSetupPanel()
 end
 
 function getPrelude()
