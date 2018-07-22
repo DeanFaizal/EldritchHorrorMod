@@ -25,14 +25,14 @@ allowDragging="true">
        preserveAspect="true" rotation="0 0 90"
        padding="0"/>
     <Text>Abhoth</Text>
-    <Button id="AbhothSetupButton" opacity="0" onClick="setupAncient(Abhoth)"/>
+    <Button id="AbhothSetupButton" opacity="0" onClick="setupAbhoth"/>
   </Panel>
    <Panel>
       <Image image="AntediluviumMystery"
          preserveAspect="true"
          padding="0"/>
       <Text>Antediluvium</Text>
-      <Button id="AntediluviumSetupButton" opacity="0"/>
+      <Button id="AntediluviumSetupButton" opacity="0" onClick="setupAntediluvium"/>
     </Panel>
    <Panel>
       <Image image="Atlach-NachaMystery"
@@ -41,7 +41,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Atlach-Nacha</Text>
-      <Button id="AtlachNachaSetupButton" opacity="0"/>
+      <Button id="AtlachNachaSetupButton" opacity="0" onClick="setupAtlachNacha"/>
     </Panel>
    <Panel>
       <Image image="AzathothMystery"
@@ -50,7 +50,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Azathoth</Text>
-      <Button id="AzathothSetupButton" opacity="0" onClick=""/>
+      <Button id="AzathothSetupButton" opacity="0" onClick="setupAzathoth"/>
     </Panel>
    <Panel>
       <Image image="CthulhuMystery"
@@ -59,7 +59,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Cthulhu</Text>
-      <Button id="CthulhuSetupButton" opacity="0" onClick=""/>
+      <Button id="CthulhuSetupButton" opacity="0" onClick="setupCthulhu"/>
     </Panel>
    <Panel>
       <Image image="ElderThingsMystery"
@@ -68,14 +68,14 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Elder Things</Text>
-      <Button id="ElderThingsSetupButton" opacity="0" onClick=""/>
+      <Button id="ElderThingsSetupButton" opacity="0" onClick="setupElderThings"/>
     </Panel>
    <Panel>
       <Image image="HasturMystery"
          preserveAspect="true"
          padding="0"/>
       <Text>Hastur</Text>
-      <Button id="HasturSetupButton" opacity="0" onClick=""/>
+      <Button id="HasturSetupButton" opacity="0" onClick="setupHastur"/>
     </Panel>
    <Panel>
       <Image image="HypnosMystery"
@@ -84,7 +84,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Hypnos</Text>
-      <Button id="HypnosSetupButton" opacity="0" onClick=""/>
+      <Button id="HypnosSetupButton" opacity="0" onClick="setupHypnos"/>
     </Panel>
    <Panel>
       <Image image="IthaquaMystery"
@@ -93,7 +93,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Ithaqua</Text>
-      <Button id="IthaquaSetupButton" opacity="0" onClick=""/>
+      <Button id="IthaquaSetupButton" opacity="0" onClick="setupIthaqua"/>
     </Panel>
    <Panel>
       <Image image="Nephren-KaMystery"
@@ -102,14 +102,14 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Nephren-Ka</Text>
-      <Button id="Nephren-KaSetupButton" opacity="0" onClick=""/>
+      <Button id="Nephren-KaSetupButton" opacity="0" onClick="setupNephrenKa"/>
     </Panel>
    <Panel>
       <Image image="NyarlathotepMystery"
          preserveAspect="true"
          padding="0"/>
       <Text>Nyarlathotep</Text>
-      <Button id="NyarlathotepSetupButton" opacity="0" onClick=""/>
+      <Button id="NyarlathotepSetupButton" opacity="0" onClick="setupNyarlathotep"/>
     </Panel>
    <Panel>
       <Image image="Shub-NiggurathMystery"
@@ -118,14 +118,14 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Shub - \nNiggurath</Text>
-      <Button id="Shub-NiggurathSetupButton" opacity="0" onClick=""/>
+      <Button id="Shub-NiggurathSetupButton" opacity="0" onClick="setupShubNiggurath"/>
     </Panel>
    <Panel>
       <Image image="ShuddeMellMystery"
          preserveAspect="true"
          padding="0"/>
       <Text>ShuddeMell</Text>
-      <Button id="ShuddeMellSetupButton" opacity="0" onClick=""/>
+      <Button id="ShuddeMellSetupButton" opacity="0" onClick="setupShuddeMell"/>
     </Panel>
    <Panel>
       <Image image="SyzygyMystery"
@@ -134,7 +134,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Syzygy</Text>
-      <Button id="SyzygySetupButton" opacity="0" onClick=""/>
+      <Button id="SyzygySetupButton" opacity="0" onClick="setupSyzygy"/>
     </Panel>
    <Panel>
       <Image image="YigMystery"
@@ -143,7 +143,7 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Yig</Text>
-      <Button id="YigSetupButton" opacity="0" onClick=""/>
+      <Button id="YigSetupButton" opacity="0" onClick="setupYig"/>
     </Panel>
    <Panel>
       <Image image="Yog-SothothMystery"
@@ -152,14 +152,14 @@ allowDragging="true">
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Yog-Sothoth</Text>
-      <Button id="Yog-SothothSetupButton" opacity="0" onClick=""/>
+      <Button id="Yog-SothothSetupButton" opacity="0" onClick="setupYogSothoth"/>
     </Panel>
    <Panel>
       <Image image="RandomMystery"
          preserveAspect="true"
          padding="0"/>
       <Text>Random</Text>
-      <Button id="RandomOfficialAncientOneSetupButton" opacity="0" onClick="randomAncient"/>
+      <Button id="RandomOfficialAncientOneSetupButton" opacity="0" onClick="randomOfficialAncient"/>
     </Panel>
 </GridLayout>
 
@@ -170,7 +170,7 @@ allowDragging="true">
       preserveAspect="true"
       padding="0"/>
    <Text>Ghatanothoa</Text>
-   <Button id="GhatanothoaSetupButton" opacity="0" onClick=""/>
+   <Button id="GhatanothoaSetupButton" opacity="0" onClick="setupGhatanothoa"/>
  </Panel>
 <Panel>
    <Image image="TheKingInYellowMystery"
@@ -179,7 +179,7 @@ allowDragging="true">
       preserveAspect="true" rotation="0 0 90"
       padding="0"/>
    <Text>The King in Yellow</Text>
-   <Button id="TheKingInYellowSetupButton" opacity="0" onClick=""/>
+   <Button id="TheKingInYellowSetupButton" opacity="0" onClick="setupTheKingInYellow"/>
  </Panel>
 <Panel>
    <Image image="TheMi-goMystery"
@@ -188,21 +188,21 @@ allowDragging="true">
       preserveAspect="true" rotation="0 0 90"
       padding="0"/>
    <Text>The Mi-go</Text>
-   <Button id="TheMi-goSetupButton" opacity="0" onClick=""/>
+   <Button id="TheMi-goSetupButton" opacity="0" onClick="setupTheMigo"/>
  </Panel>
 <Panel>
    <Image image="Y-GolonacMystery"
       preserveAspect="true"
       padding="0"/>
    <Text>Y-Golonac</Text>
-   <Button id="Y-GolonacSetupButton" opacity="0" onClick=""/>
+   <Button id="Y-GolonacSetupButton" opacity="0" onClick="setupYGolonac"/>
  </Panel>
 <Panel>
    <Image image="RandomMystery"
       preserveAspect="true"
       padding="0"/>
    <Text>Random</Text>
-   <Button id="RandomFanAncientOneSetupButton" opacity="0" onClick=""/>
+   <Button id="RandomFanAncientOneSetupButton" opacity="0" onClick="randomFanAncient"/>
  </Panel>
 </GridLayout>
 </VerticalLayout>

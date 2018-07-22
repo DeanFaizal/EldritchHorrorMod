@@ -1,4 +1,4 @@
-reimu_card = 'a2f924'
+setup_token = 'a2f924'
 assets_deck = 'mv1s47'
 boon_deck = '00c94d'
 bane_deck = '4b5612'
@@ -181,9 +181,9 @@ function setupCharacterT(a,b)
 end
 
 function createButtons()
-  local controller = getObjectFromGUID(reimu_card)
+  local controller = getObjectFromGUID(setup_token)
   controller.createButton({click_function = 'startGame',
-                          label = 'Start',
+                          label = 'Setup',
                           font_size = 400,
                           position = {0,0.30,0},
                           width = 1000,
@@ -240,9 +240,11 @@ function assets4()
 end
 
 function startGame(a, b)
+  setupToken = getObjectFromGUID("a2f924")
+  current_pos = setupToken.getPosition()
+  setupToken.setPositionSmooth({current_pos.x, current_pos.y + 500, current_pos.z + 100}, false, true)  --move the setup button 500 up and +z
   UI.show("SetupPanel")
   UI.setAttribute("SetupPanel", "active", "true")
-  UI.hide(reimu_card)
 end
 
 function hideSetupPanel(a, b)
@@ -259,9 +261,14 @@ end
   gameStarted = true
 end]]--
 
-function randomAncient()
+function randomOfficialAncient()
   local allAncients = split(options.ancient_ones,',')
   setupAncient(allAncients[math.random(#allAncients)])
+end
+
+function randomFanAncient()
+  local fanAncients = {"Ghatanothoa", "Y-Golonac", "The King in Yellow", "The Mi-go"}
+  setupAncient(fanAncients[math.random(#fanAncients)])
 end
 
 function mysticRuins()
@@ -815,3 +822,26 @@ function getOptions()
   end
   return returnarr
 end
+
+
+-- Specific Ancient One SetupPanel
+function setupAbhoth()  setupAncient("Abhoth") end
+function setupAntediluvium()  setupAncient("Antediluvium") end
+function setupAtlachNacha()  setupAncient("Atlach-Nacha") end
+function setupAzathoth()  setupAncient("Azathoth") end
+function setupCthulhu()  setupAncient("Cthulhu") end
+function setupElderThings()  setupAncient("ElderThings") end
+function setupHastur()  setupAncient("Hastur") end
+function setupHypnos()  setupAncient("Hypnos") end
+function setupIthaqua()  setupAncient("Ithaqua") end
+function setupNephrenKa()  setupAncient("Nephren-Ka") end
+function setupNyarlathotep()  setupAncient("Nyarlathotep") end
+function setupShubNiggurath()  setupAncient("Shub-Niggurath") end
+function setupShuddeMell()  setupAncient("Shudde Mell") end
+function setupSyzygy()  setupAncient("Syzygy") end
+function setupYig()  setupAncient("Yig") end
+function setupYogSothoth()  setupAncient("Yog-Sothoth") end
+function setupGhatanothoa()  setupAncient("Ghatanothoa") end
+function setupTheKingInYellow()  setupAncient("The King in Yellow") end
+function setupTheMigo()  setupAncient("The Mi-go") end
+function setupYGolonac()  setupAncient("Y-Golonac") end
