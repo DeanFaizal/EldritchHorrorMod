@@ -1,0 +1,220 @@
+
+-- Add the name of the images for rule pages.
+-- This is the name of the image assets you placed in the UI Assets menu
+-- Naming your UI assets "RulesP1", "RulesP2", etc will make this faster
+local pageList = {
+    "RulesP1",
+    "RulesP2",
+    "RulesP3",
+    "RulesP4"
+}
+
+-- Do not modify after this unless you know scripting
+local currentPage = 1
+local zoomFactor = 1.2
+
+function onLoad(save_state)
+    -- Hide page controls if there's 1 or fewer pages
+    if #pageList <= 1 then
+        UI.setAttribute("nextPage", "active", "false")
+        UI.setAttribute("previousPage", "active", "false")
+    end
+
+    UI.setAttribute("RulesTitle", "text", self.getName())
+    UI.setAttribute("RulesImage", "image", pageList[1])
+    local pageNumberString = "/ ".. #pageList
+    UI.setAttribute("MaxPageCount", "text", pageNumberString)
+
+    local buttonData = {
+        click_function = "showRules", function_owner = self, label = "Show\nRules",
+        position = {0.3, -0.5, 0.2}, rotation = {180, 90, 270}, scale = {0.5, 0.5, 0.5},
+        width = 1000, height = 800, font_size = 350
+    }
+    self.createButton(buttonData)
+end
+
+function showRules(color)
+    UI.show("RulesPanel")
+    UI.setAttribute("RulesPanel", "active", "true")
+    UI.setAttribute("RulesTitle", "text", self.getName())
+end
+
+function onClickHideRules()
+    UI.hide("RulesPanel")
+end
+
+function onEndEditZoomPercentage(player, value, id)
+    if value =="" then
+        UI.setAttribute("InputZoomMultiplier", "text", zoomFactor*100)
+        return
+    end
+
+    if value +0 <= 100 then
+        broadcastToColor("Zoom value must be above 100", player, stringColorToRGB("Red"))
+    else
+        zoomFactor = value /100
+    end
+end
+
+function onEndEditCurrentPage(player, value, id)
+    local previousCurrentPage = currentPage
+
+    if value =="" then
+        UI.setAttribute("CurrentPageCount", "text", currentPage)
+        return
+    end
+
+    if value+0 <= #pageList and value+0 > 0 then
+        currentPage = value+0
+
+        if currentPage == #pageList then --if on the last page
+            UI.setAttribute("nextPage", "active", "false")
+            UI.setAttribute("previousPage", "active", "true")
+        elseif currentPage == 1 then
+            UI.setAttribute("previousPage", "active", "false")
+            UI.setAttribute("nextPage", "active", "true")
+        else -- if in between first and last page
+            UI.setAttribute("nextPage", "active", "true")
+            UI.setAttribute("previousPage", "active", "true")
+        end
+
+        UI.setAttribute("CurrentPageCount", "text", currentPage)
+        UI.setAttribute("RulesImage", "image", pageList[currentPage])
+    else
+        --print(previousCurrentPage.. "   ".. type(previousCurrentPage))
+        UI.setAttribute("CurrentPageCount", "text", previousCurrentPage)
+        broadcastToColor("You must type a number between 1 and "..#pageList, player, stringColorToRGB("Red"))
+    end
+end
+
+function onClickNext(player, value, id)
+    if currentPage < #pageList then
+        currentPage = currentPage + 1
+
+        if currentPage == #pageList then --if on the last page
+            UI.setAttribute("nextPage", "active", "false")
+        else
+            --turn on next button if it's off
+            if UI.getAttribute("nextPage", "active") == "false" then
+                UI.setAttribute("nextPage", "active", "true")
+            end
+        end
+        --Turn on previous button if it's off
+        if UI.getAttribute("previousPage", "active") == "false" then
+            UI.setAttribute("previousPage", "active", "true")
+        end
+
+        UI.setAttribute("CurrentPageCount", "text", currentPage)
+        UI.setAttribute("RulesImage", "image", pageList[currentPage])
+    end
+end
+
+function onClickPrevious(player, value, id)
+    if currentPage > 1 then
+        currentPage = currentPage - 1
+
+        if currentPage == 1 then --if on the first page
+            UI.setAttribute("previousPage", "active", "false")
+        else
+            --turn on previous button if it's off
+            if UI.getAttribute("previousPage", "active") == "false" then
+                UI.setAttribute("previousPage", "active", "true")
+            end
+        end
+        --Turn on next button if it's off
+        if UI.getAttribute("nextPage", "active") == "false" then
+            UI.setAttribute("nextPage", "active", "true")
+        end
+
+        UI.setAttribute("CurrentPageCount", "text", currentPage)
+        UI.setAttribute("RulesImage", "image", pageList[currentPage])
+    end
+end
+
+function onToggleAspectRatio(player, value, id)
+    if value =="False" then
+        UI.setAttribute("RulesImage", "preserveAspect", "false")
+        UI.show("widenImageButton")
+        UI.setAttribute("widenImageButton", "active", "true")
+        UI.show("heightenImageButton")
+        UI.setAttribute("heightenImageButton", "active", "true")
+        UI.show("shortenImageButton")
+        UI.setAttribute("shortenImageButton", "active", "true")
+        UI.show("narrowImageButton")
+        UI.setAttribute("narrowImageButton", "active", "true")
+    else
+        UI.setAttribute("RulesImage", "preserveAspect", "true")
+        UI.hide("widenImageButton")
+        UI.hide("heightenImageButton")
+        UI.hide("shortenImageButton")
+        UI.hide("narrowImageButton")
+    end
+end
+
+function onClickZoomIn(player, value, id)
+    local newWidth = UI.getAttribute("RulesImage", "width") * zoomFactor
+    UI.setAttribute("RulesImage", "width", tostring(newWidth))
+
+    local newHeight = UI.getAttribute("RulesImage", "height") * zoomFactor
+    UI.setAttribute("RulesImage", "height", tostring(newHeight))
+end
+
+function onClickZoomOut(player, value, id)
+    local newWidth = UI.getAttribute("RulesImage", "width") / zoomFactor
+    UI.setAttribute("RulesImage", "width", tostring(newWidth))
+
+    local newHeight = UI.getAttribute("RulesImage", "height") / zoomFactor
+    UI.setAttribute("RulesImage", "height", tostring(newHeight))
+end
+
+
+-- Panel size controls
+function onClickHeighten(player, value, id)
+    local newHeight = UI.getAttribute("imageScroll", "height") * zoomFactor
+    UI.setAttribute("imageScroll", "height", tostring(newHeight))
+    newHeight = newHeight + 60 --60 added for the top and bottom margins where buttons reside
+    UI.setAttribute("RulesPanel", "height", tostring(newHeight))
+end
+
+function onClickWiden(player, value, id)
+    local newWidth = UI.getAttribute("imageScroll", "width") * zoomFactor
+    UI.setAttribute("imageScroll", "width", tostring(newWidth))
+    newWidth = UI.getAttribute("RulesPanel", "width") * zoomFactor
+    UI.setAttribute("RulesPanel", "width", tostring(newWidth))
+end
+
+function onClickShorten(player, value, id)
+    local newHeight = UI.getAttribute("imageScroll", "height") / zoomFactor
+    UI.setAttribute("imageScroll", "height", tostring(newHeight))
+    newHeight = newHeight + 60 --60 added for the top and bottom margins where buttons reside
+    UI.setAttribute("RulesPanel", "height", tostring(newHeight))
+end
+
+function onClickNarrow(player, value, id)
+    local newWidth = UI.getAttribute("imageScroll", "width") / zoomFactor
+    UI.setAttribute("imageScroll", "width", tostring(newWidth))
+    newWidth = UI.getAttribute("RulesPanel", "width") / zoomFactor
+    UI.setAttribute("RulesPanel", "width", tostring(newWidth))
+end
+
+
+-- Image Size controls
+function onClickHeightenImage(player, value, id)
+    local newHeight = UI.getAttribute("RulesImage", "height") * zoomFactor
+    UI.setAttribute("RulesImage", "height", tostring(newHeight))
+end
+
+function onClickWidenImage(player, value, id)
+    local newWidth = UI.getAttribute("RulesImage", "width") * zoomFactor
+    UI.setAttribute("RulesImage", "width", tostring(newWidth))
+end
+
+function onClickShortenImage(player, value, id)
+    local newHeight = UI.getAttribute("RulesImage", "height") / zoomFactor
+    UI.setAttribute("RulesImage", "height", tostring(newHeight))
+end
+
+function onClickNarrowImage(player, value, id)
+    local newWidth = UI.getAttribute("RulesImage", "width") / zoomFactor
+    UI.setAttribute("RulesImage", "width", tostring(newWidth))
+end

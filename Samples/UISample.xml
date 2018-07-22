@@ -1,0 +1,159 @@
+<Defaults>
+<Panel class="TankChessPanel"  color="#8F8478" outline="#635351" outlineSize="2 -2"/>
+<Button class="topButtons" width="25" height="25" rectAlignment="UpperLeft" color="#eeeeee" offsetXY="-3 -3"/>
+<Toggle class="topToggle" width="25" height="25" rectAlignment="UpperRight" color="#eeeeee" offsetXY="-3 -3"/>
+<Text class="UIText" fontSize="18" fontStyle="Bold" color="#000000"/>
+<InputField class="UIInputField" width="50" height="28" fontSize="14" fontStyle="Bold" colors="#dddddd|#FFFFFF|#C8C8C8|rgba(0.78,0.78,0.78,0.5)"/>
+<Button class="bottomButtons" width="25" height="25" rectAlignment="LowerLeft" color="#eeeeee" showAnimation="Grow" hideAnimation="Shrink"/>
+
+<Button class="controlButtons" height="100" width="40" color="#ffffff66"/>
+<Image class="controlImages" color="#ffffff99" height="95" width="35"/>
+
+<Image class="mapImage" width="144" height="144" rectAlignment="UpperCenter" offsetXY="0 -3"/>
+</Defaults>
+
+<!-- Main rules Panel -->
+<Panel id="RulesPanel" class="TankChessPanel"
+width="500"
+height="730"
+active="false"
+rectAlignment="Middle"
+showAnimation="Grow"
+hideAnimation="Shrink"
+returnToOriginalPositionWhenReleased="false"
+allowDragging="true"
+color="#bbbbbb">
+
+<Text id="RulesTitle" text="Crystal Clans Rules" class="UIText" rectAlignment="UpperCenter"
+        alignment="LowerCenter" width="230" height="80" offsetXY="0 55"></Text>
+
+<Button id="zoomInButton" class="topButtons" offsetXY="3 -3" onClick="3574b2/onClickZoomIn">
+    <Image image="ZoomIn" height="20" width="20"></Image></Button>
+<Button id="zoomOutButton" class="topButtons" offsetXY="33 -3" onClick="3574b2/onClickZoomOut">
+    <Image image="ZoomOut" height="20" width="20"></Image></Button>
+<InputField id="InputZoomMultiplier" class="UIInputField" characterValidation="Decimal" tooltip="Percentage by which zooming and resizing happens. Must be above 100."
+            tooltipPosition="Above" rectAlignment="UpperLeft" textAlignment="UpperRight"
+            text="120" offsetXY="63 -1" onEndEdit="3574b2/onEndEditZoomPercentage"></InputField>
+<Text id="PercentageZoomMultiplier" class="UIText" text="%" alignment="UpperLeft"
+        rectAlignment="UpperLeft" width="100" height="200" offsetXY="115 -5"> </Text>
+<Toggle id="aspectRatioButton" class="topToggle" tooltip="Keep image's aspect ratio intact. Uncheck to scale image manually."
+    tooltipPosition="Above" isOn="true" offsetXY="-40 -3" onValueChanged="3574b2/onToggleAspectRatio"
+    ></Toggle>
+<Button id="closeButton" class="topButtons" rectAlignment="UpperRight" color="#990000"
+        textColor="#FFFFFF" text="X" onClick="3574b2/onClickHideRules"></Button>
+
+<HorizontalScrollView id="imageScroll" width="500" height="670" scrollSensitivity="30"
+                        offsetXY="0 30" vertical="true" VertiScrollbarVisibility="AutoHide"
+                        rectAlignment="LowerCenter" raycastTarget="false">
+    <Image id="RulesImage" rectAlignment="MiddleCenter" padding="0 0 50 0" image="ZoomIn"
+            width="500" height="670" raycastTarget="false" preserveAspect="true"></Image>
+</HorizontalScrollView>
+<Button id="previousPage" class="controlButtons" onClick="3574b2/onClickPrevious" rectAlignment="MiddleLeft" offsetXY="15 0" active="false">
+    <Image class="controlImages" image="ArrowLeft"></Image></Button>
+<Button id="nextPage" class="controlButtons" onClick="3574b2/onClickNext" rectAlignment="MiddleRight" offsetXY="-15 0" >
+    <Image class="controlImages" image="ArrowRight"></Image></Button>
+
+
+<Button id="widenButton" class="bottomButtons" offsetXY="3 3" onClick="3574b2/onClickWiden">
+    <Image image="Widen" height="20" width="20"></Image></Button>
+<Button id="heightenButton" class="bottomButtons" offsetXY="33 3" onClick="3574b2/onClickHeighten">
+    <Image image="Heighten" height="20" width="20"></Image></Button>
+<Button id="widenImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="83 3"
+        active="false" onClick="3574b2/onClickWidenImage">
+    <Image image="Widen" height="20" width="20"></Image></Button>
+<Button id="heightenImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="113 3"
+        active="false" onClick="3574b2/onClickHeightenImage">
+    <Image image="Heighten" height="20" width="20"></Image></Button>
+
+<InputField id="CurrentPageCount" class="UIInputField" characterValidation="Integer" text="1"
+            rectAlignment="LowerCenter" textAlignment="LowerRight" offsetXY="-33 1"
+            onEndEdit="3574b2/onEndEditCurrentPage"></InputField>
+<Text id="MaxPageCount" class="UIText" text="/ 1112333 3" alignment="LowerLeft"
+        rectAlignment="LowerCenter" width="100" height="200" offsetXY="50 5"> </Text>
+
+<Button id="narrowButton" class="bottomButtons" offsetXY="-33 3" rectAlignment="LowerRight"
+        onClick="3574b2/onClickNarrow">
+    <Image image="Narrow" height="20" width="20"></Image></Button>
+<Button id="shortenButton" class="bottomButtons" rectAlignment="LowerRight" offsetXY="-3 3"
+        onClick="3574b2/onClickShorten">
+    <Image image="Shorten" height="20" width="20"></Image></Button>
+<Button id="narrowImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="-113 3"
+        active="false" rectAlignment="LowerRight" onClick="3574b2/onClickNarrowImage">
+    <Image image="Narrow" height="20" width="20"></Image></Button>
+<Button id="shortenImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="-83 3"
+        active="false" rectAlignment="LowerRight" onClick="3574b2/onClickShortenImage">
+    <Image image="Shorten" height="20" width="20"></Image></Button>
+</Panel>
+
+<!-- Expansion rules Panel -->
+<Panel id="ExpRulesPanel" class="TankChessPanel"
+width="500"
+height="730"
+active="false"
+rectAlignment="MiddleRight"
+showAnimation="Grow"
+hideAnimation="Shrink"
+returnToOriginalPositionWhenReleased="false"
+allowDragging="true"
+color="#bbbbbb">
+
+<Text id="ExpRulesTitle" text="Crystal Clans Rules" class="UIText" rectAlignment="UpperCenter"
+        alignment="LowerCenter" width="230" height="80" offsetXY="0 55"></Text>
+
+<Button id="ExpzoomInButton" class="topButtons" offsetXY="3 -3" onClick="6468fb/onClickZoomIn">
+    <Image image="ZoomIn" height="20" width="20"></Image></Button>
+<Button id="ExpzoomOutButton" class="topButtons" offsetXY="33 -3" onClick="6468fb/onClickZoomOut">
+    <Image image="ZoomOut" height="20" width="20"></Image></Button>
+<InputField id="ExpInputZoomMultiplier" class="UIInputField" characterValidation="Decimal" tooltip="Percentage by which zooming and resizing happens. Must be above 100."
+            tooltipPosition="Above" rectAlignment="UpperLeft" textAlignment="UpperRight"
+            text="120" offsetXY="63 -1" onEndEdit="6468fb/onEndEditZoomPercentage"></InputField>
+<Text id="ExpPercentageZoomMultiplier" class="UIText" text="%" alignment="UpperLeft"
+        rectAlignment="UpperLeft" width="100" height="200" offsetXY="115 -5"> </Text>
+<Toggle id="ExpaspectRatioButton" class="topToggle" tooltip="Keep image's aspect ratio intact. Uncheck to scale image manually."
+    tooltipPosition="Above" isOn="true" offsetXY="-40 -3" onValueChanged="6468fb/onToggleAspectRatio"
+    ></Toggle>
+<Button id="ExpcloseButton" class="topButtons" rectAlignment="UpperRight" color="#990000"
+        textColor="#FFFFFF" text="X" onClick="6468fb/onClickHideRules"></Button>
+
+<HorizontalScrollView id="ExpimageScroll" width="500" height="670" scrollSensitivity="30"
+                        offsetXY="0 30" vertical="true" VertiScrollbarVisibility="AutoHide"
+                        rectAlignment="LowerCenter" raycastTarget="false">
+    <Image id="ExpRulesImage" rectAlignment="MiddleCenter" padding="0 0 50 0" image="ZoomIn"
+            width="500" height="670" raycastTarget="false" preserveAspect="true"></Image>
+</HorizontalScrollView>
+<Button id="ExppreviousPage" class="controlButtons" onClick="6468fb/onClickPrevious" rectAlignment="MiddleLeft" offsetXY="15 0" active="false">
+    <Image class="controlImages" image="ArrowLeft"></Image></Button>
+<Button id="ExpnextPage" class="controlButtons" onClick="6468fb/onClickNext" rectAlignment="MiddleRight" offsetXY="-15 0" >
+    <Image class="controlImages" image="ArrowRight"></Image></Button>
+
+
+<Button id="ExpwidenButton" class="bottomButtons" offsetXY="3 3" onClick="6468fb/onClickWiden">
+    <Image image="Widen" height="20" width="20"></Image></Button>
+<Button id="ExpheightenButton" class="bottomButtons" offsetXY="33 3" onClick="6468fb/onClickHeighten">
+    <Image image="Heighten" height="20" width="20"></Image></Button>
+<Button id="ExpwidenImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="83 3"
+        active="false" onClick="6468fb/onClickWidenImage">
+    <Image image="Widen" height="20" width="20"></Image></Button>
+<Button id="ExpheightenImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="113 3"
+        active="false" onClick="6468fb/onClickHeightenImage">
+    <Image image="Heighten" height="20" width="20"></Image></Button>
+
+<InputField id="ExpCurrentPageCount" class="UIInputField" characterValidation="Integer" text="1"
+            rectAlignment="LowerCenter" textAlignment="LowerRight" offsetXY="-33 1"
+            onEndEdit="6468fb/onEndEditCurrentPage"></InputField>
+<Text id="ExpMaxPageCount" class="UIText" text="/ 1112333 3" alignment="LowerLeft"
+        rectAlignment="LowerCenter" width="100" height="200" offsetXY="50 5"> </Text>
+
+<Button id="ExpnarrowButton" class="bottomButtons" offsetXY="-33 3" rectAlignment="LowerRight"
+        onClick="6468fb/onClickNarrow">
+    <Image image="Narrow" height="20" width="20"></Image></Button>
+<Button id="ExpshortenButton" class="bottomButtons" rectAlignment="LowerRight" offsetXY="-3 3"
+        onClick="6468fb/onClickShorten">
+    <Image image="Shorten" height="20" width="20"></Image></Button>
+<Button id="ExpnarrowImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="-113 3"
+        active="false" rectAlignment="LowerRight" onClick="6468fb/onClickNarrowImage">
+    <Image image="Narrow" height="20" width="20"></Image></Button>
+<Button id="ExpshortenImageButton" class="bottomButtons" color="#ffaaaa" offsetXY="-83 3"
+        active="false" rectAlignment="LowerRight" onClick="6468fb/onClickShortenImage">
+    <Image image="Shorten" height="20" width="20"></Image></Button>
+</Panel>
