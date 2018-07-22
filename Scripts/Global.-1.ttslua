@@ -1,0 +1,805 @@
+reimu_card = 'a2f924'
+assets_deck = 'mv1s47'
+boon_deck = '00c94d'
+bane_deck = '4b5612'
+spell_deck = 'n17byb'
+talent_deck = '00c94d'
+u_assets_deck = 'hr2o1d'
+pawn_bag = '5p189x'
+hp_bag = '14vzl8'
+san_bag = '8o97r1'
+trash_bag = '62mbfc'
+game_board = '5y4u6n'
+zone = '4i02oy'
+pyramid_bag = '7r39h8'
+ant_bag = '1sw2bb'
+et_bag = '084f8n'
+ancients_bag = 'i1suo8'
+prelude_deck = '323e47'
+doom_track = '0meu2k'
+monster_bag = '75h14u'
+mystic_bag = '9o33o4'
+dream_bag = 'f35a79'
+moreset = false
+disaster_bag = 'f2ace9'
+nyarla_bag = '142c8e'
+
+focus_bag = 'ps1q97'
+clue_bag = '652d1t'
+ticket_bag = '6d91f2'
+will_bag = '8ca0b4'
+resource_bag = 'f0fcc6'
+
+function onSave()
+  return JSON.encode({started=gameStarted})
+end
+
+function onLoad(save_state)
+  math.randomseed(os.time())
+  if save_state ~= nil and JSON.decode(save_state) ~= nil then
+    for k,v in pairs(JSON.decode(save_state)) do
+      print(k,v)
+    end
+  end
+  options = getOptions()
+  createButtons()
+end
+
+function setupCharacter(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+
+function setupCharacterF(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  getObjectFromGUID(focus_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+function setupCharacterW(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  getObjectFromGUID(will_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+function setupCharacterTC(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  getObjectFromGUID(ticket_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
+  getObjectFromGUID(clue_bag).takeObject({position={a.getPosition().x,a.getPosition().y+3,a.getPosition().z}})
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+function setupCharacterRC(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  getObjectFromGUID(resource_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
+  getObjectFromGUID(clue_bag).takeObject({position={a.getPosition().x,a.getPosition().y+3,a.getPosition().z}})
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+function setupCharacterC(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  getObjectFromGUID(clue_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+function setupCharacterT(a,b)
+  local card_offset = 0
+  local decks = {bane_deck,assets_deck,talent_deck,boon_deck,spell_deck,u_assets_deck}
+  for k,v in pairs(a.getVar('starters')) do
+    for i=1,#decks do
+      if type(searchForIn(v,decks[i],{rotation={0,180,0},position={a.getPosition().x+2+card_offset,a.getPosition().y+1,a.getPosition().z}})) == 'userdata' then break end
+    end
+    card_offset = card_offset + 1
+  end
+  getObjectFromGUID(ticket_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z}})
+  local token = searchForIn(a.getName(),pawn_bag,{position={a.getPosition().x-2,a.getPosition().y+2,a.getPosition().z}})
+  local hp = getObjectFromGUID(hp_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z+3}})
+  local san = getObjectFromGUID(san_bag).takeObject({position={a.getPosition().x,a.getPosition().y+2,a.getPosition().z-3}})  
+  hp.Counter.setValue(a.getVar('hp'))
+  san.Counter.setValue(a.getVar('san'))
+  token.setColorTint(stringColorToRGB(b))
+  local namepos = Player[b].getPlayerHand()
+end
+
+function createButtons()
+  local controller = getObjectFromGUID(reimu_card)
+  controller.createButton({click_function = 'startGame',
+                          label = 'Start',
+                          font_size = 400,
+                          position = {0,0.30,0},
+                          width = 1000,
+                          height = 550})  
+  assetButtons()
+end
+
+function assetButtons()
+  local gameboard = getObjectFromGUID(game_board)
+  gameboard.createButton({click_function = 'assets1',
+                          label = 'Restock',
+                          font_size = 300,
+                          position = {-21.3,0.1,13},
+                          width = 1500,
+                          height = 500})
+  gameboard.createButton({click_function = 'assets2',
+                          label = 'Restock',
+                          font_size = 300,
+                          position = {-17.5,0.1,13},
+                          width = 1500,
+                          height = 500})
+  gameboard.createButton({click_function = 'assets3',
+                          label = 'Restock',
+                          font_size = 300,
+                          position = {-13.8,0.1,13},
+                          width = 1500,
+                          height = 500})
+  gameboard.createButton({click_function = 'assets4',
+                          label = 'Restock',
+                          font_size = 300,
+                          position = {-10,0.1,13},
+                          width = 1500,
+                          height = 500})
+end
+
+function assets1()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  searchForIn('',assets_deck,{position={pos.x-21.5,1.5,pos.z-16}}).setRotation({0,180,0})
+end
+
+function assets2()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  searchForIn('',assets_deck,{position={pos.x-17.6,1.5,pos.z-16}}).setRotation({0,180,0})
+end
+
+function assets3()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  searchForIn('',assets_deck,{position={pos.x-13.8,1.5,pos.z-16}}).setRotation({0,180,0})
+end
+
+function assets4()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  searchForIn('',assets_deck,{position={pos.x-10,1.5,pos.z-16}}).setRotation({0,180,0})
+end
+
+function startGame(a, b)
+  options = getOptions()
+  if tonumber(options.prelude) == 1 then
+    getPrelude()
+  end
+  randomAncient()
+  gameStarted = true
+end
+
+function randomAncient()
+  local allAncients = split(options.ancient_ones,',')
+  setupAncient(allAncients[math.random(#allAncients)])
+end
+
+function mysticRuins()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(mystic_bag)
+  bag.takeObject({position={25.41, 1.09, 24.44},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={25.41, 2.09, 24.44},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={pos.x+23.5,1.4,pos.z-25.5},rotation={0,90,0},callback_owner=Global})
+  bag.takeObject({position={pos.x+23.5,1.2,pos.z-25.5},rotation={0,90,0},callback_owner=Global})
+end
+
+function nyarla()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(nyarla_bag)
+  bag.takeObject({position={60.59, 0.96, 8.46},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={67.05, 0.96, 8.46},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={60.59, 0.96, 4.34},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={67.05, 0.96, 4.34},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={63.91, 0.87, 1.11},rotation={180,0,0},callback_owner=Global})
+end
+
+function disaster()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(disaster_bag)
+  bag.takeObject({position={16.41, 1.18, 24.36},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={22.41, 1.11, 24.44},rotation={180,0,0},callback_owner=Global})
+  bag.takeObject({position={22.41, 2.11, 24.44},rotation={180,0,0},callback_owner=Global})
+end
+
+function egyptSide()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(pyramid_bag)
+  bag.takeObject({position={pos.x,1.01,pos.z-25.5},rotation={0,180,0},callback='callbackLock',callback_owner=Global}).interactable = true
+  local tokens = searchForIn('Tokens',bag,{position={50,1,0}})
+  searchForIn('Egypt',bag,{position={pos.x+13.5,1,pos.z-21},rotation={180,0,0}})
+  searchForIn('Africa',bag,{position={pos.x+13.5,1,pos.z-26.5},rotation={180,0,0}})
+  searchForIn('Adventure',bag,{position={pos.x+21,1,pos.z-21},rotation={180,270,0}})
+  egyptMonsters()
+  tokens.takeObject({position={pos.x+21,3,pos.z-21}})
+  local gatepos = getObjectFromGUID('96en34').getPosition()
+  local cluepos = getObjectFromGUID('652d1t').getPosition()
+  for i=1,3 do
+    tokens.takeObject({position={gatepos.x,5,gatepos.z},rotation={0,180,0}})
+  end
+  for i=1,6 do
+    tokens.takeObject({position={cluepos.x,5,cluepos.z}})
+  end
+end
+
+function DreamSide()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(dream_bag)
+  bag.takeObject({position={pos.x,1.01,pos.z-30.9},rotation={0,270,0},callback='callbackLock',callback_owner=Global}).interactable = true  
+  local tokens = searchForIn('Tokens',bag,{position={50,1,0}})
+  searchForIn('Dream Quest',bag,{position={pos.x+10.6,1,pos.z-21},rotation={180,0,0}})
+  searchForIn('Dreamlands',bag,{position={pos.x+10.6,1,pos.z-26.5},rotation={180,0,0}})
+  searchForIn('Otherworldly Dreams',bag,{position={pos.x+25,1,pos.z-21},rotation={180,270,0}})
+  dreamMonsters()
+  tokens.takeObject({position={pos.x+10.6,2,pos.z-21}})
+  tokens.takeObject({position={pos.x+25,2,pos.z-21}})
+  tokens.takeObject({position={pos.x+17,1,pos.z-27},rotation={0,180,0}})
+  tokens.takeObject({position={pos.x+25,1,pos.z-27},rotation={0,180,0}})
+  tokens.takeObject({position={pos.x+33,1,pos.z-27},rotation={0,180,0}})
+  local gatepos = getObjectFromGUID('96en34').getPosition()
+  local cluepos = getObjectFromGUID('652d1t').getPosition()
+  for i=1,3 do
+    tokens.takeObject({position={gatepos.x,5,gatepos.z},rotation={0,180,0}})
+  end
+  for i=1,7 do
+    tokens.takeObject({position={cluepos.x,5,cluepos.z},rotation={0,0,0}})
+  end
+end
+
+function DreamSide2()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(dream_bag)
+  bag.takeObject({position={pos.x,1.01,pos.z-30.9},rotation={0,270,0},callback='callbackLock',callback_owner=Global}).interactable = true  
+  local tokens = searchForIn('Tokens',bag,{position={50,1,0}})
+  searchForIn('Dream Quest',bag,{position={pos.x+10.6,1,pos.z-21},rotation={180,0,0}})
+  searchForIn('Dreamlands',bag,{position={pos.x+10.6,1,pos.z-26.5},rotation={180,0,0}})
+  searchForIn('Otherworldly Dreams',bag,{position={pos.x+25,1,pos.z-21},rotation={180,270,0}})
+  tokens.takeObject({position={pos.x+10.6,2,pos.z-21}})
+  tokens.takeObject({position={pos.x+25,2,pos.z-21}})
+  tokens.takeObject({position={pos.x+17,1,pos.z-27},rotation={0,180,0}})
+  tokens.takeObject({position={pos.x+25,1,pos.z-27},rotation={0,180,0}})
+  tokens.takeObject({position={pos.x+33,1,pos.z-27},rotation={0,180,0}})
+  local gatepos = getObjectFromGUID('96en34').getPosition()
+  local cluepos = getObjectFromGUID('652d1t').getPosition()
+  for i=1,3 do
+    tokens.takeObject({position={gatepos.x,5,gatepos.z},rotation={0,180,0}})
+  end
+  for i=1,7 do
+    tokens.takeObject({position={cluepos.x,5,cluepos.z},rotation={0,0,0}})
+  end
+end
+
+function dreamMonsters()
+  table.insert(ancient.monsters, 'Zoog')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Ghoul')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Moon-Beast')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Nightgaunt')
+  table.insert(ancient.monsters, 1)
+  setAsideMonsters()
+ end
+
+function egyptMonsters()
+  table.insert(ancient.monsters, 'Sand Dweller')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Mummy')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Spawn of Sebak')
+  table.insert(ancient.monsters, 1)
+  setAsideMonsters()
+end
+
+function antSide()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local bag = getObjectFromGUID(ant_bag)
+  bag.takeObject({position={pos.x,1.01,pos.z-25.5},rotation={0,180,0},callback='callbackLock',callback_owner=Global}).interactable = true
+  local tokens = searchForIn('Tokens',bag,{position={50,1,0}})
+  searchForIn('Dream Quest',bag,{position={pos.x+13.5,1,pos.z-21},rotation={180,0,0}})
+  searchForIn('Mountains',bag,{position={13.34, 1.15, -21.34},rotation={180,0,0}})
+  searchForIn('Outpost',bag,{position={13.29, 1.07, -16.43},rotation={180,0,0}})
+  searchForIn('Adventure',bag,{position={pos.x+21,1,pos.z-21},rotation={180,270,0}})
+  searchForIn('Research',bag,{position={13.36, 1.15, -26.22},rotation={180,0,0}})
+  antMonsters()
+  tokens.takeObject({position={pos.x+21,3,pos.z-21}})
+  local gatepos = getObjectFromGUID('96en34').getPosition()
+  local cluepos = getObjectFromGUID('652d1t').getPosition()
+  for i=1,3 do
+    tokens.takeObject({position={gatepos.x,5,gatepos.z},rotation={0,180,0}})
+  end
+  for i=1,6 do
+    tokens.takeObject({position={cluepos.x,5,cluepos.z}})
+  end
+end
+
+function antMonsters()
+  table.insert(ancient.monsters, 'Elder Thing')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Giant Penguin')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Shoggoth')
+  table.insert(ancient.monsters, 1)
+  table.insert(ancient.monsters, 'Shoggoth')
+  table.insert(ancient.monsters, 1)
+  setAsideMonsters()
+end
+
+ancient = {}
+ancient.mythos = {}
+ancient.mythos.stage1 = {}
+ancient.mythos.stage2 = {}
+ancient.mythos.stage3 = {}
+ancient.monsters = {}
+
+function setupAncient(name)
+  if name == 'Hastur' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 2
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 5
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Byakhee', 1}
+    ancient.doom = 11
+elseif name == 'Nyarlathotep' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 12
+    nyarla()
+elseif name == 'Antediluvium' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Cultist', 5, 'Deep One', 1}
+    ancient.doom = 13
+    mysticRuins()
+  elseif name == 'The Mi-go' then
+    ancient.mythos.stage1.green = 2
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Cultist', 6, 'Mi-go', 1}
+    ancient.doom = 12
+  elseif name == 'The King in Yellow' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Cultist', 5, 'Riot', 1, 'Witch', 1, 'Warlock', 1}
+    ancient.doom = 14
+elseif name == 'Shudde Mell' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 2
+    ancient.mythos.stage2.green = 4
+    ancient.mythos.stage2.yellow = 2
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 15
+    disaster()
+  elseif name == 'Ghatanothoa' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 1
+    ancient.monsters = {'Mummy', 1, 'Mi-go', 1, 'Lloigor', 1}
+    ancient.doom = 13
+  elseif name == 'Y-Golonac' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Maniac', 1, 'Ghoul', 2,}
+    ancient.doom = 13
+  elseif name == 'Hypnos' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Zoog', 1, 'Ghoul', 1, 'Moon-Beast', 1, 'Nightgaunt', 1}
+    ancient.doom = 12
+    DreamSide2()
+  elseif name == 'Atlach-Nacha' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 2
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Leng Spider', 1}
+    ancient.doom = 9
+  elseif name == 'Yog-Sothoth' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 14
+  elseif name == 'Elder Things' then
+    ancient.mythos.stage1.green = 2
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 4
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 16
+    antSide()
+  elseif name == 'Azathoth' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 15
+    local pos = getObjectFromGUID(game_board).getPosition()
+    getObjectFromGUID(et_bag).takeObject({position={pos.x+24,1,pos.z+16.45}})
+  elseif name == 'Syzygy' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 2
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 5
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 13
+    mysticRuins()
+  elseif name == 'Ithaqua' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 2
+    ancient.mythos.stage2.green = 4
+    ancient.mythos.stage2.yellow = 2
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Gnoph-Keh', 1, 'Wendigo', 1}
+    ancient.doom = 13
+  elseif name == 'Shub-Niggurath' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 2
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Goat Spawn', 2, 'Ghoul', 2 , 'Dark Young', 1}
+    ancient.doom = 13
+  elseif name == 'Yig' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 2
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Cultist', 6, 'Serpent People', 1}
+    ancient.doom = 10
+  elseif name == 'Abhoth' then
+    ancient.mythos.stage1.green = 1
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 1
+    ancient.mythos.stage2.green = 3
+    ancient.mythos.stage2.yellow = 2
+    ancient.mythos.stage2.blue = 1
+    ancient.mythos.stage3.green = 2
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Cultist', 8}
+    ancient.doom = 14
+  elseif name == 'Nephren-Ka' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 2
+    ancient.mythos.stage2.green = 1
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.doom = 12
+    egyptSide()
+  elseif name == 'Cthulhu' then
+    ancient.mythos.stage1.green = 0
+    ancient.mythos.stage1.yellow = 2
+    ancient.mythos.stage1.blue = 2
+    ancient.mythos.stage2.green = 1
+    ancient.mythos.stage2.yellow = 3
+    ancient.mythos.stage2.blue = 0
+    ancient.mythos.stage3.green = 3
+    ancient.mythos.stage3.yellow = 4
+    ancient.mythos.stage3.blue = 0
+    ancient.monsters = {'Deep One', 1, 'Star Spawn', 1}
+    ancient.doom = 12
+  end
+  setupAncient2(searchForIn(name,ancients_bag,{position={50,5,20}}))
+  setupMythosDeck()
+  if not moreset then
+    setAsideMonsters()
+  end
+end
+
+function getPrelude()
+  local prelude = searchForIn('',prelude_deck,{callback_owner=Global,position={0,2,0},rotation={180,0,180}})
+  if prelude.getGUID() == '95wn6m' then
+    moreset = true
+    antMonsters()
+  elseif prelude.getGUID() == 'qxkqjd' then
+    moreset = true
+    egyptMonsters()
+  end
+end
+
+function setScale(a)
+  -- 666 lol
+  a.setScale({6,6,6})
+  a.lock()
+end
+
+function getPlayerCount()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local num_players = #getSeatedPlayers()
+  local player_num_ref = getObjectFromGUID('d8b7a4')
+  local player_guid = {'4576dr', '7ojp91', 's2rwq2', 'olbcuq', 't117wb', '36tlad', 'ky9tj2', 'hutw2i'}
+  player_num_ref.takeObject({position={pos.x+34,1,pos.z+25},rotation={0,180,0},guid=player_guid[num_players]})
+end
+
+function callbackLock(a)
+  a.unlock()
+end
+
+function setupAncient2(bag)
+  local doom_tracker = getObjectFromGUID(doom_track)
+  local pos = getObjectFromGUID(game_board).getPosition()
+  doom_tracker.setPosition({pos.x+20.2-(2.31*ancient.doom),1.3,pos.z+16.67})
+  bag.takeObject({position={pos.x+34,1,pos.z+10},rotation={0,180,0},callback='callbackLock',callback_owner=Global})
+  searchForIn('Research',bag,{position={10.41, 1.11, 24.44},rotation={180,0,0}})
+  searchForIn('Mystery',bag,{position={pos.x+63.8,1,pos.z+13.5},rotation={180,270,0}})
+  searchForIn('',bag,{position={pos.x+42,1,9},rotation={180,0,0}})
+  searchForIn('',bag,{position={pos.x+42,1,14},rotation={180,0,0}})
+  searchForIn('',bag,{position={pos.x+42,1,19},rotation={180,0,0}})
+  searchForIn('',bag,{position={pos.x+42,1,24},rotation={180,0,0}})
+  getPlayerCount()
+end
+
+z_offset = 0
+function setAsideMonsters()
+  for i=1,#ancient.monsters,2 do
+    for j=1,ancient.monsters[i+1] do
+      searchForIn(ancient.monsters[i],monster_bag,{position={46,1.5+1*(j-1),20-z_offset},rotation={180,0,0}})
+    end
+    z_offset = z_offset + 2
+  end
+end
+
+function setupMythosDeck()
+  local pos = getObjectFromGUID(game_board).getPosition()
+  local diff = split(options.difficulty,',')
+  local hgm = 'qszvkn'
+  local mgm = 'vxiwyn'
+  local egm = 'uc2b43'
+  local hym = '8c13f8'
+  local mym = 'n621fe'
+  local eym = 'cr05o1'
+  local hbm = 'k39546'
+  local mbm = '6g97ke'
+  local ebm = '0c9452'
+  local blue = {ebm, mbm, hbm}
+  local green = {egm, mgm, hgm}
+  local yellow = {eym, mym, hym}
+  local stage_offset = 0
+  for k,v in pairs(ancient.mythos) do
+    for i,j in pairs(v) do
+      if i == 'blue' then
+        for a=1,j do
+          local randomNum = tonumber(diff[math.random(#diff)])
+          searchForIn('',blue[randomNum],{position={pos.x+29.5+stage_offset,1.5,3},rotation={180,0,0}})
+        end
+      elseif i == 'green' then
+        for a=1,j do
+          local randomNum = tonumber(diff[math.random(#diff)])
+          searchForIn('',green[randomNum],{position={pos.x+29.5+stage_offset,1.5,3},rotation={180,0,0}})
+        end
+      elseif i == 'yellow' then
+        for a=1,j do
+          local randomNum = tonumber(diff[math.random(#diff)])
+          searchForIn('',yellow[randomNum],{position={pos.x+29.5+stage_offset,1.5,3},rotation={180,0,0}})
+        end
+      end
+    end
+    stage_offset = stage_offset + 3.5
+  end
+end
+
+function searchForIn(object, containerguid, params2)
+  params2.guid = '000000'
+  local deckorbag
+  local guids = {}
+  if type(containerguid) == 'string' then
+    deckorbag = getObjectFromGUID(containerguid)
+  else
+    deckorbag = containerguid
+  end
+  local obj = nil
+  for k,v in pairs(deckorbag.getObjects()) do
+    if string.find(string.lower(v.name==nil and v.nickname==nil and '' or v.name or v.nickname), string.lower(string.gsub(object,'-','%%-'))) then
+      table.insert(guids, v.guid)
+    end
+  end
+  if #guids > 0 then
+    params2.guid = guids[math.random(#guids)]
+    return deckorbag.takeObject(params2)
+  else
+    return false
+  end
+end
+
+function split(input, split)
+  local returnarr = {}
+  local i = 1
+  for str in string.gmatch(input, '([^' .. split .. ']+)') do
+    returnarr[i] = str
+    i = i + 1
+  end
+  return returnarr
+end
+
+function getRulesText()
+  for k,v in pairs(getNotebookTabs()) do
+    if v.color == 'White' then
+      return v.body
+    end
+  end
+end
+
+function getOptions()
+  local returnarr = {}
+  local lines = split(getRulesText(),'\n')
+  for k,v in pairs(lines) do
+    local optparam = split(v,'=')
+    returnarr[optparam[1]] = optparam[2]
+  end
+  return returnarr
+end
