@@ -1,13 +1,14 @@
 <Defaults>
   <Text fontSize="20" fontStyle="Semibold" color="#FFFFFF"/>
+  <Toggle textColor="White"/>
 </Defaults>
 <Panel id="SetupPanel"
   color="#111111"
   outline="#FFFFFF"
   outlineSize="2 -2"
-  Padding="20"
+  Padding="20 20 16 16"
 width="770"
-height="800"
+height="890"
 active="false"
 rectAlignment="Middle"
 showAnimation="Grow"
@@ -15,9 +16,26 @@ hideAnimation="Shrink"
 returnToOriginalPositionWhenReleased="false"
 allowDragging="true">
 <VerticalLayout>
+<Text fontSize="30">Setup</Text>
+<VerticalLayout padding="8 8 8 0">
+  <Text>Mythos Difficulty</Text>
+  <HorizontalLayout padding="140 0 4 8">
+    <Toggle id="easyMythosToggle" isOn="true"
+      onValueChanged="easyMythosToggleValueChanged">Easy</Toggle>
+    <Toggle id="mediumMythosToggle" isOn="true"
+      onValueChanged="mediumMythosToggleValueChanged">Medium</Toggle>
+    <Toggle id="hardMythosToggle" isOn="true"
+      onValueChanged="hardMythosToggleValueChanged">Hard</Toggle>
+  </HorizontalLayout>
+</VerticalLayout>
+  <VerticalLayout padding="8 0 0 8">
+  <Text>Random Prelude</Text>
+  <HorizontalLayout padding="330 0">
+  <Toggle id="preludeToggle" isOn="false" onValueChanged="preludeToggleValueChanged">Yes</Toggle>
+</HorizontalLayout>
+</VerticalLayout>
   <Text>Official Ancient Ones</Text>
-
-<GridLayout cellSize="130 90" padding="20" spacing="8 8">
+<GridLayout cellSize="130 90" padding="20 20 8 8" spacing="8 2">
   <Panel>
     <Image image="AbhothMystery"
       width="190"
@@ -37,7 +55,7 @@ allowDragging="true">
    <Panel>
       <Image image="Atlach-NachaMystery"
         width="190"
-        height="128"
+        height="130"
          preserveAspect="true" rotation="0 0 90"
          padding="0"/>
       <Text>Atlach-Nacha</Text>
@@ -163,8 +181,8 @@ allowDragging="true">
     </Panel>
 </GridLayout>
 
-<Text>Fan Made Ancient Ones</Text>
-<GridLayout  cellSize="130 90" padding="20" spacing="8 8">
+<Text>Fan-Made Ancient Ones</Text>
+<GridLayout  cellSize="130 90" padding="20 8" spacing="8 8">
 <Panel>
    <Image image="GhatanothoaMystery"
       preserveAspect="true"
@@ -205,5 +223,9 @@ allowDragging="true">
    <Button id="RandomFanAncientOneSetupButton" opacity="0" onClick="randomFanAncient"/>
  </Panel>
 </GridLayout>
+<HorizontalLayout padding="300 300 4 24">
+<Button fontSize="18" fontStyle="Semibold" height="20"
+  onClick="cancelSetup">Cancel</Button>
+</HorizontalLayout>
 </VerticalLayout>
 </Panel>

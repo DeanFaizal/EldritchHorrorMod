@@ -30,6 +30,11 @@ ticket_bag = '6d91f2'
 will_bag = '8ca0b4'
 resource_bag = 'f0fcc6'
 
+shouldGetPrelude = "False"
+shouldIncludeEasyMythos = "True"
+shouldIncludeMediumMythos = "True"
+shouldIncludeHardMythos = "True"
+
 function onSave()
   return JSON.encode({started=gameStarted})
 end
@@ -245,6 +250,12 @@ function startGame(a, b)
   setupToken.setPositionSmooth({current_pos.x, current_pos.y + 500, current_pos.z + 100}, false, true)  --move the setup button 500 up and +z
   UI.show("SetupPanel")
   UI.setAttribute("SetupPanel", "active", "true")
+end
+
+function cancelSetup(a,b)
+  UI.hide("SetupPanel")
+  current_pos = setupToken.getPosition()
+  setupToken.setPositionSmooth({current_pos.x, current_pos.y - 500, current_pos.z - 100}, false, true)  --move the setup button 500 down and -z
 end
 
 function hideSetupPanel(a, b)
@@ -677,6 +688,9 @@ elseif name == 'Shudde Mell' then
   if not moreset then
     setAsideMonsters()
   end
+  if shouldGetPrelude == "True" then
+    getPrelude()
+  end
   hideSetupPanel()
 end
 
@@ -735,7 +749,29 @@ end
 
 function setupMythosDeck()
   local pos = getObjectFromGUID(game_board).getPosition()
-  local diff = split(options.difficulty,',')
+  -- local diff = {split(options.difficulty,',')}
+
+  local diff = {}
+  local currentTableIndex = 1
+  if shouldIncludeEasyMythos == "True" then
+    -- broadcastToAll("Easy mythos included")
+    diff[currentTableIndex] = 1
+    currentTableIndex = currentTableIndex + 1
+  end
+  if shouldIncludeMediumMythos == "True" then
+    -- broadcastToAll("Medium mythos included")
+    diff[currentTableIndex] = 2
+    currentTableIndex = currentTableIndex + 1
+  end
+  if shouldIncludeHardMythos == "True" then
+    -- broadcastToAll("Hard mythos included")
+    diff[currentTableIndex] = 3
+  end
+
+-- for i=1,#diff do
+--   print(diff[i])
+-- end
+
   local hgm = 'qszvkn'
   local mgm = 'vxiwyn'
   local egm = 'uc2b43'
@@ -845,3 +881,31 @@ function setupGhatanothoa()  setupAncient("Ghatanothoa") end
 function setupTheKingInYellow()  setupAncient("The King in Yellow") end
 function setupTheMigo()  setupAncient("The Mi-go") end
 function setupYGolonac()  setupAncient("Y-Golonac") end
+
+function preludeToggleValueChanged(sender, value)
+  shouldGetPrelude = value
+end
+
+function easyMythosToggleValueChanged(sender, value)
+shouldIncludeEasyMythos = value
+makeSureAtLeastMediumMythosIsSelected()
+end
+
+function mediumMythosToggleValueChanged(sender, value)
+shouldIncludeMediumMythos = value
+makeSureAtLeastMediumMythosIsSelected()
+end
+
+function hardMythosToggleValueChanged(sender, value)
+shouldIncludeHardMythos = value
+makeSureAtLeastMediumMythosIsSelected()
+end
+
+function makeSureAtLeastMediumMythosIsSelected()
+  if shouldIncludeEasyMythos == "False"
+  and shouldIncludeMediumMythos == "False"
+  and shouldIncludeHardMythos == "False"
+  then
+    UI.setAttribute("mediumMythosToggle", "isOn", "True")
+  end
+end
